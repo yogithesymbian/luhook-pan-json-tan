@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  luhook:
+    build: .
+    ports:
+      - "3002:3002"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - XENDIT_WEBHOOK_VERIFICATION_TOKEN=${XENDIT_WEBHOOK_VERIFICATION_TOKEN}
+      - PORT=3002
+      - RUST_LOG=luhook=info,tower_http=info
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # Optional: PostgreSQL for local development
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=luhook
+      - POSTGRES_PASSWORD=luhook_dev
+      - POSTGRES_DB=luhook_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U luhook"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
