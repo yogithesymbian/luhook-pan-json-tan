@@ -31,3 +31,16 @@ Webhook yang sangat powerful. "Satu hook untuk mengatur semuanya."
 🔍 **Observable**: Structured logging with tracing
 🔒 **Secure**: Constant-time comparison prevents timing attacks
 💪 **Reliable**: systemd auto-restart, no PM2 overhead
+
+# stay tone
+
+## Support
+
+- **Repository**: https://github.com/yo-detection/luhook-pan-json-tan
+- **Issues**: https://github.com/yo-detection/luhook-pan-json-tan/issues
+- **Backend 1**: https://github.com/yo-detection/yo-whatsapp
+- **Backend 2**: https://github.com/yo-detection/yo-core-catetin
+
+---
+
+**Happy Deploying! 🚀🦀**
